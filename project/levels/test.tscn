@@ -54,7 +54,9 @@ mesh = SubResource( 2 )
 material/0 = ExtResource( 3 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.422618, 0.640856, -0.640856, 0, 0.707107, 0.707107, 0.906308, -0.298836, 0.298836, -4.94852, 5, 2.09046 )
+projection = 0
 size = 9.0
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.110419, 0, 0, 0, 0.110419, 0, 0, 0, 0.110419, 0.454956, 0.856972, 0 )
+transform = Transform( 0.110419, 0, 0, 0, 0.110419, 0, 0, 0, 0.110419, 0, 0.0846581, 0 )
