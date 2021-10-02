@@ -18,9 +18,16 @@
 [sub_resource type="Environment" id=3]
 background_mode = 1
 background_color = Color( 0.623529, 0.435294, 1, 1 )
-ambient_light_color = Color( 1, 1, 1, 1 )
-ambient_light_energy = 2.0
+background_energy = 2.0
+ambient_light_color = Color( 0.94902, 0.94902, 0.94902, 1 )
+ambient_light_energy = 1.8
 ssao_enabled = true
+ssao_radius2 = 0.2
+ssao_intensity2 = 0.2
+ssao_bias = 0.05
+ssao_light_affect = 1.0
+ssao_blur = 1
+ssao_edge_sharpness = 10.0
 
 [sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
@@ -115,8 +122,8 @@ shape = SubResource( 1 )
 mesh = SubResource( 2 )
 material/0 = ExtResource( 2 )
 
-[node name="player_mesh" parent="Board" instance=ExtResource( 8 )]
-transform = Transform( 0.212132, 0, 0.212132, 0, 0.3, 0, -0.212132, 0, 0.212132, 0, 0, 0 )
+[node name="player" parent="Board" instance=ExtResource( 8 )]
+transform = Transform( 0.282843, 0, 0.282843, 0, 0.4, 0, -0.282843, 0, 0.282843, 0, 0, 0 )
 
 [node name="Camera" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.707107, -0.40558, 0.579228, 0, 0.819152, 0.573577, -0.707107, -0.40558, 0.579228, 12, 11.091, 12 )
