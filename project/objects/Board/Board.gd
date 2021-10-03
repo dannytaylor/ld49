@@ -28,13 +28,9 @@ func _rotate_board(delta):
 		
 	rotation_degrees.x -= mouse_delta.x
 	rotation_degrees.x = clamp(rotation_degrees.x, -max_tilt, max_tilt)
-	box_mid.rotation_degrees.x = rotation_degrees.x
-	hand_r.rotation_degrees.z = 180-rotation_degrees.x*4
 	
-	rotation_degrees.z += mouse_delta.y
+	rotation_degrees.z -= mouse_delta.y
 	rotation_degrees.z = clamp(rotation_degrees.z, -max_tilt, max_tilt)
-	box_inner.rotation_degrees.z = rotation_degrees.z
-	hand_l.rotation_degrees.z = rotation_degrees.z*4
 	
 	mouse_delta = Vector2.ZERO
 
