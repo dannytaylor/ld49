@@ -17,7 +17,16 @@ func _ready():
 
 func _physics_process(delta):
 	
-	rotation_degrees.x += mouse_delta.x
+	_rotate_board(delta)
+	
+
+func _rotate_board(delta):
+	
+	if mouse_delta == Vector2.ZERO:
+		rotation_degrees = lerp(rotation_degrees, Vector3.ZERO, 0.01)
+		return
+		
+	rotation_degrees.x -= mouse_delta.x
 	rotation_degrees.x = clamp(rotation_degrees.x, -max_tilt, max_tilt)
 	box_mid.rotation_degrees.x = rotation_degrees.x
 	hand_r.rotation_degrees.z = 180-rotation_degrees.x*4
@@ -28,8 +37,7 @@ func _physics_process(delta):
 	hand_l.rotation_degrees.z = rotation_degrees.z*4
 	
 	mouse_delta = Vector2.ZERO
-	
-	
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_delta = event.relative * mouse_adjust
