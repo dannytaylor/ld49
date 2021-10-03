@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://objects/Camp/Camp.gd" type="Script" id=1]
+
+[sub_resource type="CylinderMesh" id=1]
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="PrismMesh" id=3]
+
+[node name="Camp" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="spawn_timer" type="Timer" parent="."]
+autostart = true
+
+[node name="flagpole" type="MeshInstance" parent="."]
+transform = Transform( 0.01, 0, 0, 0, 0.25, 0, 0, 0, 0.01, 0.097554, 0.101861, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="flag" type="MeshInstance" parent="."]
+transform = Transform( 0.075, 0, 0, 0, 0.1, 0, 0, 0, 0.01, 0.0999954, 0.227854, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="tent" type="MeshInstance" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.15, 0, 0, 0, 0.1, 0, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="spawn_location" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.327285, 0.253108 )
+
+[connection signal="timeout" from="spawn_timer" to="." method="_on_spawn_timer_timeout"]
