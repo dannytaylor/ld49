@@ -1,6 +1,6 @@
 extends RigidBody
 
-const max_tilt = 15
+const max_tilt = 8
 const mouse_adjust = 0.05
 var mouse_delta = Vector2.ZERO
 

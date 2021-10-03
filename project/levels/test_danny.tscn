@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://objects/Enemy/Enemy2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/Board/wall_material.tres" type="Material" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://assets/meshes/player_mesh.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/meshes/box_middle.glb" type="PackedScene" id=9]
 [ext_resource path="res://objects/Enemy/Enemy.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/images/red_circle.png" type="Texture" id=11]
+[ext_resource path="res://assets/images/white_circle.png" type="Texture" id=12]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -17,24 +19,22 @@
 
 [sub_resource type="Environment" id=3]
 background_mode = 1
-background_color = Color( 0.623529, 0.435294, 1, 1 )
-background_energy = 2.0
-ambient_light_color = Color( 0.94902, 0.94902, 0.94902, 1 )
-ambient_light_energy = 1.8
+background_color = Color( 0.545098, 0.447059, 0.870588, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
 ssao_enabled = true
 ssao_radius2 = 0.2
 ssao_intensity2 = 0.2
 ssao_bias = 0.05
 ssao_light_affect = 1.0
-ssao_blur = 1
-ssao_edge_sharpness = 10.0
+ssao_color = Color( 1, 1, 1, 1 )
+ssao_edge_sharpness = 16.0
 
 [node name="Spatial" type="Spatial"]
 
 [node name="Board" parent="." instance=ExtResource( 6 )]
 
 [node name="StaticBody" type="StaticBody" parent="Board"]
-transform = Transform( 0.093, 0, 0, 0, 1, 0, 0, 0, 4.65309, -4.49088, 0.449671, 0.0167924 )
+transform = Transform( 0.5, 0, 0, 0, 1.2, 0, 0, 0, 5.5, -5.88632, 0.167453, 0.0167924 )
 visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Board/StaticBody"]
@@ -45,7 +45,7 @@ mesh = SubResource( 2 )
 material/0 = ExtResource( 2 )
 
 [node name="StaticBody2" type="StaticBody" parent="Board"]
-transform = Transform( 0.093, 0, 0, 0, 1, 0, 0, 0, 4.49022, 4.45548, 0.449671, 0 )
+transform = Transform( 0.5, 0, 0, 0, 1.2, 0, 0, 0, 5.5, 5.901, 0.167453, 0 )
 visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Board/StaticBody2"]
@@ -56,7 +56,7 @@ mesh = SubResource( 2 )
 material/0 = ExtResource( 2 )
 
 [node name="StaticBody3" type="StaticBody" parent="Board"]
-transform = Transform( -1.51516e-08, 0, -4.42724, 0, 1, 0, 0.093, 0, -7.21289e-07, -0.00880665, 0.449671, -4.39771 )
+transform = Transform( -8.14603e-08, 0, -5.5, 0, 1.2, 0, 0.5, 0, -8.96064e-07, -0.00880665, 0.167453, -5.82233 )
 visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Board/StaticBody3"]
@@ -67,7 +67,7 @@ mesh = SubResource( 2 )
 material/0 = ExtResource( 2 )
 
 [node name="StaticBody4" type="StaticBody" parent="Board"]
-transform = Transform( -1.51516e-08, 0, -4.45422, 0, 1, 0, 0.093, 0, -7.25685e-07, -0.00880665, 0.449671, 4.47029 )
+transform = Transform( -8.14603e-08, 0, -5.5, 0, 1.2, 0, 0.5, 0, -8.96064e-07, -0.00880665, 0.167453, 5.77672 )
 visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Board/StaticBody4"]
@@ -81,28 +81,65 @@ material/0 = ExtResource( 2 )
 transform = Transform( 0.282843, 0, 0.282843, 0, 0.4, 0, -0.282843, 0, 0.282843, 0, 0, 0 )
 
 [node name="Camera" parent="." instance=ExtResource( 5 )]
-transform = Transform( 0.707107, -0.40558, 0.579228, 0, 0.819152, 0.573577, -0.707107, -0.40558, 0.579228, 12, 11.091, 12 )
-size = 12.5
+transform = Transform( 0.707107, -0.40558, 0.579228, 0, 0.819152, 0.573577, -0.707107, -0.40558, 0.579228, 12, 10.9764, 12 )
+size = 12.8
 
 [node name="Enemy" parent="." instance=ExtResource( 10 )]
 transform = Transform( 0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0.454956, 0.856972, -1.28707 )
 
 [node name="Enemy2" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 1.91366 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.78629, 1.91366 )
 
 [node name="box_outer" parent="." instance=ExtResource( 7 )]
 transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, -2.24902, 0 )
 
 [node name="box_middle" parent="box_outer" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.195068, 0 )
+transform = Transform( 0.99, 0, 0, 0, 1, 0, 0, 0, 0.99, 0, -0.110889, 0 )
 
 [node name="box_inner" parent="box_outer/box_middle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.314947, 0 )
+transform = Transform( 0.98, 0, 0, 0, 1, 0, 0, 0, 0.98, 0, 0.0516968, 0 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="TextureProgress" parent="UI"]
+margin_left = 980.0
+margin_top = 40.0
+margin_right = 1236.0
+margin_bottom = 296.0
+rect_scale = Vector2( 0.5, 0.5 )
+value = 100.0
+texture_under = ExtResource( 12 )
+texture_progress = ExtResource( 11 )
+fill_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+margin_left = 80.0
+margin_top = 40.0
+margin_right = 336.0
+margin_bottom = 296.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/TextureRect"]
+margin_left = 96.6943
+margin_top = 34.0865
+margin_right = 159.694
+margin_bottom = 80.0865
+rect_scale = Vector2( 3.60874, 3.16148 )
+custom_colors/font_color = Color( 0.337255, 0.415686, 0.537255, 1 )
+text = "lvl"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="hand_l" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.10729, 6.81107 )
