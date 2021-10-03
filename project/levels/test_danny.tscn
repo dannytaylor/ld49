@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://objects/Camp/Camp.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/Hero.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/audio/Alex_McCulloch-pop_1248.mp3" type="AudioStream" id=13]
 [ext_resource path="res://assets/meshes/box_outer.gd" type="Script" id=14]
 [ext_resource path="res://assets/meshes/barrier.tscn" type="PackedScene" id=15]
+[ext_resource path="res://objects/Board/Hole.tscn" type="PackedScene" id=16]
 
 [sub_resource type="BoxShape" id=8]
 extents = Vector3( 3, 3, 2 )
@@ -142,6 +143,18 @@ transform = Transform( -1, 0, -1.50996e-08, 0, 0.2, 0, 1.50996e-07, 0, -0.1, -0.
 
 [node name="barrier18" parent="Board/walls" instance=ExtResource( 15 )]
 transform = Transform( -1, 0, -1.50996e-08, 0, 0.2, 0, 1.50996e-07, 0, -0.1, -2.29903, -0.0945665, 1.83784 )
+
+[node name="holes" type="Spatial" parent="Board"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.395596, 0 )
+
+[node name="hole" parent="Board/holes" instance=ExtResource( 16 )]
+transform = Transform( 0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 4.32155, 0.320212, -2.58934 )
+
+[node name="hole2" parent="Board/holes" instance=ExtResource( 16 )]
+transform = Transform( 0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, -0.436363, 0.320212, 4.22936 )
+
+[node name="hole3" parent="Board/holes" instance=ExtResource( 16 )]
+transform = Transform( 0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, -4.22012, 0.320212, 2.93884 )
 
 [node name="Camera" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.707107, -0.40558, 0.579228, 0, 0.819152, 0.573577, -0.707107, -0.40558, 0.579228, 12, 10.9764, 12 )
