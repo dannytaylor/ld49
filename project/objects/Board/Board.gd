@@ -3,10 +3,13 @@ extends RigidBody
 const max_tilt = 15
 const mouse_adjust = 0.05
 var mouse_delta = Vector2.ZERO
+export(Material) var floor_mat = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if floor_mat != null:
+		$MeshInstance.material_override = floor_mat
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -23,3 +26,11 @@ func _physics_process(delta):
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_delta = event.relative * mouse_adjust
+
+func set_collision(collide):
+	if collide:
+		self.collision_layer = 1
+		self.collision_mask = 1
+	else:
+		self.collision_layer = 0
+		self.collision_mask = 0

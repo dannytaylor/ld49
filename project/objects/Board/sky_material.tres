@@ -1,0 +1,6 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://objects/Board/photos_2018_1_11_fst_gray-sky-stormy-weather.jpg" type="Texture" id=1]
+
+[resource]
+albedo_texture = ExtResource( 1 )
