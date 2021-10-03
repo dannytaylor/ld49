@@ -9,6 +9,7 @@
 [sub_resource type="QuadMesh" id=3]
 
 [node name="Enemy" type="RigidBody"]
+gravity_scale = 2.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
