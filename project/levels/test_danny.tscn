@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://objects/Enemy/Enemy2.tscn" type="PackedScene" id=1]
-[ext_resource path="res://objects/Board/wall_material.tres" type="Material" id=2]
+[ext_resource path="res://objects/Camp/Camp.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/Hero.gd" type="Script" id=2]
 [ext_resource path="res://assets/meshes/box_inner.glb" type="PackedScene" id=3]
 [ext_resource path="res://assets/meshes/hand.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/Player/Camera.tscn" type="PackedScene" id=5]
@@ -14,10 +14,10 @@
 [ext_resource path="res://assets/images/heart.png" type="Texture" id=12]
 [ext_resource path="res://assets/audio/Alex_McCulloch-pop_1248.mp3" type="AudioStream" id=13]
 [ext_resource path="res://assets/meshes/box_outer.gd" type="Script" id=14]
+[ext_resource path="res://assets/meshes/barrier.tscn" type="PackedScene" id=15]
 
-[sub_resource type="BoxShape" id=1]
-
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 3, 3, 2 )
 
 [sub_resource type="Environment" id=3]
 background_mode = 1
@@ -46,73 +46,123 @@ border_color = Color( 0.741176, 0.121569, 0.247059, 1 )
 [node name="Spatial" type="Spatial"]
 
 [node name="Board" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12933, 0 )
 
-[node name="StaticBody" type="StaticBody" parent="Board"]
-transform = Transform( 0.5, 0, 0, 0, 1.2, 0, 0, 0, 5.5, -5.88632, 0.167453, 0.0167924 )
-visible = false
+[node name="NorthCamp" parent="Board" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.22888, -0.12933, -4.19848 )
+camp_name = "North Camp"
+enemy_type = "goblin"
+spawn_parent = NodePath("../../..")
 
-[node name="CollisionShape" type="CollisionShape" parent="Board/StaticBody"]
-shape = SubResource( 1 )
+[node name="EastCamp" parent="Board" instance=ExtResource( 1 )]
+transform = Transform( 0.025479, 0, -0.999675, 0, 1, 0, 0.999675, 0, 0.025479, 4.54553, -0.12933, -4.74242 )
+camp_name = "North Camp"
+enemy_type = "goblin"
+spawn_parent = NodePath("../../..")
 
-[node name="MeshInstance" type="MeshInstance" parent="Board/StaticBody"]
-mesh = SubResource( 2 )
-material/0 = ExtResource( 2 )
+[node name="SouthCamp" parent="Board" instance=ExtResource( 1 )]
+transform = Transform( -0.596603, 0, -0.802536, 0, 1, 0, 0.802536, 0, -0.596603, 4.67133, -0.12933, 4.55424 )
+camp_name = "North Camp"
+enemy_type = "goblin"
+spawn_parent = NodePath("../../..")
 
-[node name="StaticBody2" type="StaticBody" parent="Board"]
-transform = Transform( 0.5, 0, 0, 0, 1.2, 0, 0, 0, 5.5, 5.901, 0.167453, 0 )
-visible = false
+[node name="Hero" type="MeshInstance" parent="Board"]
+transform = Transform( 0.15, 0, 0, 0, -6.55671e-09, -0.15, 0, 0.15, -6.55671e-09, 0, 0.0664393, 0 )
+script = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Board/StaticBody2"]
-shape = SubResource( 1 )
+[node name="HeroMesh" parent="Board/Hero" instance=ExtResource( 8 )]
+transform = Transform( 1.41421, 0, 1.41421, -1.41421, -8.74228e-08, 1.41421, 6.18172e-08, -2, -6.18172e-08, 0, 1.9361e-08, 0.442929 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Board/StaticBody2"]
-mesh = SubResource( 2 )
-material/0 = ExtResource( 2 )
+[node name="AttackZone" type="Area" parent="Board/Hero"]
+transform = Transform( 1, 0, 0, 0, 1, 3.55271e-15, 0, -3.55271e-15, 1, 0, 0, 0 )
+collision_layer = 128
+collision_mask = 128
 
-[node name="StaticBody3" type="StaticBody" parent="Board"]
-transform = Transform( -8.14603e-08, 0, -5.5, 0, 1.2, 0, 0.5, 0, -8.96064e-07, -0.00880665, 0.167453, -5.82233 )
-visible = false
+[node name="c" type="CollisionShape" parent="Board/Hero/AttackZone"]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -5.57853e-08, -1.27622 )
+shape = SubResource( 8 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Board/StaticBody3"]
-shape = SubResource( 1 )
+[node name="AttackChargeTimer" type="Timer" parent="Board/Hero"]
+wait_time = 0.66
+one_shot = true
 
-[node name="MeshInstance" type="MeshInstance" parent="Board/StaticBody3"]
-mesh = SubResource( 2 )
-material/0 = ExtResource( 2 )
+[node name="walls" type="Spatial" parent="Board"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12933, 0 )
 
-[node name="StaticBody4" type="StaticBody" parent="Board"]
-transform = Transform( -8.14603e-08, 0, -5.5, 0, 1.2, 0, 0.5, 0, -8.96064e-07, -0.00880665, 0.167453, 5.77672 )
-visible = false
+[node name="barrier" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -0.1, 0, -1.50996e-07, 0, 0.2, 0, 1.50996e-08, 0, -1, 3.37653, -0.0945665, -2.65898 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Board/StaticBody4"]
-shape = SubResource( 1 )
+[node name="barrier3" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -0.1, 0, -1.50996e-07, 0, 0.2, 0, 1.50996e-08, 0, -1, 3.37653, -0.0945665, 4.22568 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Board/StaticBody4"]
-mesh = SubResource( 2 )
-material/0 = ExtResource( 2 )
+[node name="barrier4" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -0.1, 0, -1.50996e-07, 0, 0.2, 0, 1.50996e-08, 0, -1, 3.37653, -0.0945665, 0.74324 )
 
-[node name="player" parent="Board" instance=ExtResource( 8 )]
-transform = Transform( 0.282843, 0, 0.282843, 0, 0.4, 0, -0.282843, 0, 0.282843, 0, 0, 0 )
+[node name="barrier6" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -0.1, 0, -1.50996e-07, 0, 0.2, 0, 1.50996e-08, 0, -1, 1.52788, -0.0945665, 2.5664 )
+
+[node name="barrier9" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -0.1, 0, -1.50996e-07, 0, 0.2, 0, 1.50996e-08, 0, -1, 0.268936, -0.0945665, -2.81837 )
+
+[node name="barrier16" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -0.1, 0, -1.50996e-07, 0, 0.2, 0, 1.50996e-08, 0, -1, 1.7439, -0.0945665, -2.63701 )
+
+[node name="barrier17" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -0.1, 0, -1.50996e-07, 0, 0.2, 0, 1.50996e-08, 0, -1, 1.7439, -0.0945665, -0.764175 )
+
+[node name="barrier11" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -0.1, 0, -1.50996e-07, 0, 0.2, 0, 1.50996e-08, 0, -1, -1.69792, -0.0945665, -0.837524 )
+
+[node name="barrier12" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -0.1, 0, -1.50996e-07, 0, 0.2, 0, 1.50996e-08, 0, -1, -3.23322, -0.0945665, -2.362 )
+
+[node name="barrier13" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -0.1, 0, -1.50996e-07, 0, 0.2, 0, 1.50996e-08, 0, -1, -3.23322, -0.0945665, -0.919312 )
+
+[node name="barrier14" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -0.1, 0, -1.50996e-07, 0, 0.2, 0, 1.50996e-08, 0, -1, -3.23322, -0.0945665, 2.75118 )
+
+[node name="barrier15" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -0.1, 0, -1.50996e-07, 0, 0.2, 0, 1.50996e-08, 0, -1, -1.58525, -0.0945665, 4.20112 )
+
+[node name="barrier2" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -1, 0, -1.50996e-08, 0, 0.2, 0, 1.50996e-07, 0, -0.1, 4.27231, -0.0945665, -3.68713 )
+
+[node name="barrier8" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -1, 0, -1.50996e-08, 0, 0.2, 0, 1.50996e-07, 0, -0.1, -2.35339, -0.0945665, -3.28064 )
+
+[node name="barrier5" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -1, 0, -1.50996e-08, 0, 0.2, 0, 1.50996e-07, 0, -0.1, 2.48738, -0.0945665, 1.66628 )
+
+[node name="barrier10" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -1, 0, -1.50996e-08, 0, 0.2, 0, 1.50996e-07, 0, -0.1, -0.616333, -0.0945665, -1.75667 )
+
+[node name="barrier7" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -1, 0, -1.50996e-08, 0, 0.2, 0, 1.50996e-07, 0, -0.1, -0.705719, -0.0945665, 3.31309 )
+
+[node name="barrier18" parent="Board/walls" instance=ExtResource( 15 )]
+transform = Transform( -1, 0, -1.50996e-08, 0, 0.2, 0, 1.50996e-07, 0, -0.1, -2.29903, -0.0945665, 1.83784 )
 
 [node name="Camera" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.707107, -0.40558, 0.579228, 0, 0.819152, 0.573577, -0.707107, -0.40558, 0.579228, 12, 10.9764, 12 )
 size = 12.8
 
-[node name="Enemy" parent="." instance=ExtResource( 10 )]
-transform = Transform( 0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0.454956, 0.856972, -1.28707 )
-
-[node name="Enemy2" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.78629, 1.91366 )
+[node name="Enemytest" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.454956, 1.80003, -1.28707 )
 
 [node name="box_outer" parent="." instance=ExtResource( 7 )]
 transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, -2.24902, 0 )
 script = ExtResource( 14 )
+
+[node name="knobl" parent="box_outer/box" index="0"]
+transform = Transform( 1.78814e-07, 3.44853e-08, 0.1, -0.5, 3.94118e-08, 4.17232e-08, -2.68221e-07, -0.0826526, 3.57628e-08, 9.87053e-05, 0, 0.999875 )
 
 [node name="box_middle" parent="box_outer" instance=ExtResource( 9 )]
 transform = Transform( 0.99, 0, 0, 0, 1, 0, 0, 0, 0.99, 0, -0.110889, 0 )
 
 [node name="box_inner" parent="box_outer/box_middle" instance=ExtResource( 3 )]
 transform = Transform( 0.98, 0, 0, 0, 1, 0, 0, 0, 0.98, 0, 0.0516968, 0 )
+visible = false
 
 [node name="hand_l" parent="box_outer" instance=ExtResource( 4 )]
 transform = Transform( 1.53846, 0, 0, 0, 1.53846, 0, 0, 0, 1.53846, 0, 1.75651, 10.4786 )
@@ -181,5 +231,7 @@ __meta__ = {
 stream = ExtResource( 13 )
 volume_db = -21.0
 autoplay = true
+
+[connection signal="timeout" from="Board/Hero/AttackChargeTimer" to="Board/Hero" method="_on_AttackChargeTimer_timeout"]
 
 [editable path="box_outer"]

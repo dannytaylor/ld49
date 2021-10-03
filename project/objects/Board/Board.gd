@@ -4,12 +4,6 @@ const max_tilt = 8
 const mouse_adjust = 0.05
 var mouse_delta = Vector2.ZERO
 
-onready var box_mid = get_node("../box_outer/box_middle")
-onready var box_inner = get_node("../box_outer/box_middle/box_inner")
-
-onready var hand_l = get_node("../hand_l")
-onready var hand_r = get_node("../hand_r")
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
