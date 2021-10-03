@@ -3,6 +3,7 @@ extends RigidBody
 const max_tilt = 8
 const mouse_adjust = 0.05
 var mouse_delta = Vector2.ZERO
+var captureMouse = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,3 +32,6 @@ func _rotate_board(delta):
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_delta = event.relative * mouse_adjust
+		if not captureMouse:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			captureMouse = true

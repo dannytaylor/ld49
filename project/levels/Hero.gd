@@ -2,10 +2,21 @@ extends MeshInstance
 
 var attack_charged = false
 
+export(float) var health = 100.0 setget _set_health
+export(float) var level = 1 setget _set_level
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
+func _set_health(_health):
+	health = _health
+	get_tree().get_root().get_node("Spatial/UI/HealthBar").value = health
+
+func _set_level(_level):
+	level = _level
+	get_tree().get_root().get_node("Spatial/UI/XPBar").value = level
+	
 func _get_melee_enemies():
 	return $AttackZone.get_overlapping_bodies()
 
@@ -26,10 +37,10 @@ func _attack_single_enemy():
 	print("Attacking enemy: " + closest_enemy.to_string())
 	var slashscn = load("res://objects/effects/slash.tscn")
 	var slash = slashscn.instance()
+	self.get_parent().add_child(slash)
 	slash.global_transform.origin = self.global_transform.origin
 	slash.look_at(closest_enemy.global_transform.origin, Vector3(0, 1, 0))
 	slash.rotate_object_local(Vector3(0,1,0), 3.14)
-	self.get_parent().add_child(slash)
 
 func _attack_all_enemies():
 	# Hit 'em all

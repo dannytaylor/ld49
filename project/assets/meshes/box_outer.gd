@@ -1,6 +1,6 @@
 extends Spatial
 
-onready var board = get_node("../Board")
+onready var board = get_tree().get_root().get_node("Spatial/Board")
 
 onready var box_mid = get_node("box_middle")
 onready var box_inner = get_node("box_middle/box_inner")

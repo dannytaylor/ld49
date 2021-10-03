@@ -21,8 +21,9 @@ func _get_rng_val(minval, maxval):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.randomize()
-	if enemy_type == "goblin" or enemy_type == "hobgoblin" or enemy_type == "ogre":
-		monster_scene = load("res://objects/Enemy/Enemy.tscn")
+	# if enemy_type == "goblin" or enemy_type == "hobgoblin" or enemy_type == "ogre":
+	monster_scene = load("res://objects/Enemy/Enemy.tscn")
+	
 	# First spawn is either a quarter of the duration or 4/5ths at most
 	$spawn_timer.wait_time = _get_rng_val(spawn_delay * (1.0 / 4.0), spawn_delay * (4.0 / 5.0))
 	$spawn_timer.start()

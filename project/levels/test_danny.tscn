@@ -17,10 +17,10 @@
 [ext_resource path="res://assets/meshes/barrier.tscn" type="PackedScene" id=15]
 [ext_resource path="res://objects/Board/Hole.tscn" type="PackedScene" id=16]
 
-[sub_resource type="BoxShape" id=8]
+[sub_resource type="BoxShape" id=1]
 extents = Vector3( 3, 3, 2 )
 
-[sub_resource type="Environment" id=3]
+[sub_resource type="Environment" id=2]
 background_mode = 1
 background_color = Color( 0.545098, 0.447059, 0.870588, 1 )
 ambient_light_color = Color( 1, 1, 1, 1 )
@@ -32,15 +32,15 @@ ssao_light_affect = 1.0
 ssao_color = Color( 1, 1, 1, 1 )
 ssao_edge_sharpness = 16.0
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.741176, 0.121569, 0.247059, 1 )
 border_color = Color( 0.741176, 0.121569, 0.247059, 1 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.8, 0.886275, 0.882353, 1 )
 corner_detail = 16
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.0823529, 0.537255, 0.407843, 1 )
 border_color = Color( 0.741176, 0.121569, 0.247059, 1 )
 
@@ -75,13 +75,11 @@ script = ExtResource( 2 )
 transform = Transform( 1.41421, 0, 1.41421, -1.41421, -8.74228e-08, 1.41421, 6.18172e-08, -2, -6.18172e-08, 0, 1.9361e-08, 0.442929 )
 
 [node name="AttackZone" type="Area" parent="Board/Hero"]
-transform = Transform( 1, 0, 0, 0, 1, 3.55271e-15, 0, -3.55271e-15, 1, 0, 0, 0 )
-collision_layer = 128
-collision_mask = 128
+transform = Transform( 1, 0, 0, 0, 1, 1.77636e-14, 0, -1.77636e-14, 1, 0, -6.57756e-08, -1.50477 )
 
 [node name="c" type="CollisionShape" parent="Board/Hero/AttackZone"]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -5.57853e-08, -1.27622 )
-shape = SubResource( 8 )
+transform = Transform( 2.5, 0, 0, 0, 2.5, -1.77636e-14, 0, 2.84217e-14, 1, 0, -3.62271e-08, -0.828791 )
+shape = SubResource( 1 )
 
 [node name="AttackChargeTimer" type="Timer" parent="Board/Hero"]
 wait_time = 0.66
@@ -184,7 +182,7 @@ transform = Transform( 1.53846, 0, 0, 0, 1.53846, 0, 0, 0, 1.53846, 0, 1.75651, 
 transform = Transform( 0.336132, -0.412843, 1.44341, 0.0936348, 1.48203, 0.402085, 1.49837, 0, -0.34893, 10.5316, 2.24078, 0 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 3 )
+environment = SubResource( 2 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -194,8 +192,9 @@ margin_top = 40.0
 margin_right = 1345.61
 margin_bottom = 140.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_styles/fg = SubResource( 4 )
-custom_styles/bg = SubResource( 5 )
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+step = 1.0
 value = 90.0
 percent_visible = false
 __meta__ = {
@@ -208,9 +207,11 @@ margin_top = 40.0
 margin_right = 455.5
 margin_bottom = 140.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_styles/fg = SubResource( 6 )
-custom_styles/bg = SubResource( 5 )
-value = 90.0
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 4 )
+max_value = 10.0
+step = 1.0
+value = 1.0
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
