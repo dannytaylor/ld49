@@ -55,6 +55,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12933, 0 )
 
 [node name="NorthCamp" parent="Board" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.22888, -0.12933, -4.19848 )
+spawn_delay = 15.0
 camp_name = "North Camp"
 enemy_type = "goblin"
 spawn_parent = NodePath("../../..")
@@ -62,6 +63,7 @@ hero = NodePath("../Hero")
 
 [node name="EastCamp" parent="Board" instance=ExtResource( 1 )]
 transform = Transform( 0.025479, 0, -0.999675, 0, 1, 0, 0.999675, 0, 0.025479, 4.54553, -0.12933, -4.74242 )
+spawn_delay = 20.0
 camp_name = "North Camp"
 enemy_type = "ogre"
 spawn_parent = NodePath("../../..")
@@ -69,6 +71,8 @@ hero = NodePath("../Hero")
 
 [node name="SouthCamp" parent="Board" instance=ExtResource( 1 )]
 transform = Transform( -0.596603, 0, -0.802536, 0, 1, 0, 0.802536, 0, -0.596603, 4.67133, -0.12933, 4.55424 )
+max_simul = 3
+spawn_delay = 10.0
 camp_name = "North Camp"
 enemy_type = "goblin"
 spawn_parent = NodePath("../../..")
@@ -103,6 +107,7 @@ margin_left = 49.6382
 margin_top = 27.1794
 margin_right = 150.638
 margin_bottom = 41.1794
+text = "Left Click"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -134,7 +139,7 @@ margin_left = 140.728
 margin_top = 27.35
 margin_right = 240.728
 margin_bottom = 118.35
-text = "	"
+text = "	Right click"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -276,7 +281,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_styles/fg = SubResource( 4 )
 custom_styles/bg = SubResource( 5 )
 step = 1.0
-value = 90.0
+value = 100.0
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -292,7 +297,6 @@ custom_styles/fg = SubResource( 6 )
 custom_styles/bg = SubResource( 5 )
 max_value = 10.0
 step = 1.0
-value = 1.0
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
