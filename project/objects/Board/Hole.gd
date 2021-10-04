@@ -19,5 +19,6 @@ func _ready():
 func _on_hole_body_entered(body):
 	
 	if body.is_in_group("enemy"):
+		$FallAudio.play()
 		body.collision_layer = 0
 		body.collision_mask = 0

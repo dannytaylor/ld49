@@ -35,6 +35,28 @@ script = ExtResource( 3 )
 [node name="baddie01_mesh" parent="." instance=ExtResource( 2 )]
 transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.0898738, 0 )
 
+[node name="Skeleton" parent="baddie01_mesh/Attack" index="1"]
+bones/1/bound_children = [  ]
+bones/3/bound_children = [  ]
+bones/5/bound_children = [  ]
+bones/10/bound_children = [  ]
+bones/18/bound_children = [  ]
+
+[node name="BoneAttachment" parent="baddie01_mesh/Attack/Skeleton" index="0"]
+transform = Transform( 0.996459, -0.0840617, 0.0014616, 0.0194237, 0.247087, 0.968798, -0.0817999, -0.96534, 0.247845, -186.578, -432.61, -65.0176 )
+
+[node name="BoneAttachment2" parent="baddie01_mesh/Attack/Skeleton" index="1"]
+transform = Transform( 0.29273, 0.0573771, -0.954472, -0.701227, 0.691506, -0.173493, 0.650068, 0.720088, 0.242659, -102.72, -344.538, 25.4367 )
+
+[node name="BoneAttachment3" parent="baddie01_mesh/Attack/Skeleton" index="2"]
+transform = Transform( -0.317513, -0.656914, 0.683849, 0.281023, 0.623582, 0.729501, -0.905655, 0.423803, -0.0133869, -301.784, -479.659, 18.8994 )
+
+[node name="BoneAttachment4" parent="baddie01_mesh/Attack/Skeleton" index="3"]
+transform = Transform( 0.836085, 0.0561047, -0.545723, 0.548187, -0.0468547, 0.835042, 0.0212802, -0.997325, -0.0699304, -185.424, -436.79, -8.35952 )
+
+[node name="BoneAttachment5" parent="baddie01_mesh/Attack/Skeleton" index="4"]
+transform = Transform( 0.68119, 0.0356944, -0.731236, 0.731767, -0.0636564, 0.678576, -0.0223264, -0.997333, -0.0694821, -185.937, -435.839, 56.7688 )
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.00135422, 0 )
 shape = SubResource( 1 )
@@ -64,3 +86,5 @@ autostart = true
 [connection signal="timeout" from="BackswingTimer" to="." method="_on_BackswingTimer_timeout"]
 [connection signal="timeout" from="CheckTimer" to="." method="_on_CheckTimer_timeout"]
 [connection signal="timeout" from="ArmorUp" to="." method="_on_ArmorUp_timeout"]
+
+[editable path="baddie01_mesh"]

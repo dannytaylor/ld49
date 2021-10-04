@@ -3,8 +3,9 @@ extends MeshInstance
 var attack_charged = false
 var bow_charged = false
 
-export(float) var health = 100.0 setget _set_health
-export(float) var level = 1 setget _set_level
+var maxhp = 100
+var health = maxhp
+var level = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,14 +44,7 @@ func _colorize_gui():
 	$BowCharge/ColorRect.color.g = bow_green
 	$BowCharge/ColorRect.color.b = bow_blue
 
-func _set_health(_health):
-	health = _health
-	get_tree().get_root().get_node("Spatial/UI/HealthBar").value = health
 
-func _set_level(_level):
-	level = _level
-	get_tree().get_root().get_node("Spatial/UI/XPBar").value = level
-	
 func _get_melee_enemies():
 	return $AttackZone.get_overlapping_bodies()
 	
@@ -76,6 +70,7 @@ func _attack_single_enemy():
 	var slash = slashscn.instance()
 	$HeroMesh/AnimationPlayer.stop()
 	$HeroMesh/AnimationPlayer.play("attack",-1,2)
+	$HitSound.play()
 	self.get_parent().add_child(slash)
 	slash.global_transform.origin = self.global_transform.origin
 	slash.look_at(closest_enemy.global_transform.origin, Vector3(0, 1, 0))
@@ -93,9 +88,11 @@ func _attack_all_enemies():
 	spin.global_transform.origin = self.global_transform.origin
 	self.get_parent().add_child(spin)
 	$HeroMesh/AnimationPlayer.play("spin",-1,2)
+	$HitSound.play()
 
 func get_hit(dmg):
 	print("I got hit")
+	get_tree().get_root().get_node("Spatial/UI/HealthBar").value = health - dmg
 
 func _attack_enemy_with_bow():
 	var enemies = _get_ranged_enemies()

@@ -39,6 +39,7 @@ func _attempt_attack():
 	if attack_type == "melee":
 		var slashscn = load("res://objects/attacks/slash.tscn")
 		var slash = slashscn.instance()
+		$baddie01_mesh/AnimationPlayer.play("Attack|mixamocom|Layer0")
 		slash.global_transform.origin = self.global_transform.origin
 		slash.look_at(hero_obj.global_transform.origin, Vector3(0, 1, 0))
 		slash.rotate_object_local(Vector3(0,1,0), 3.14)
@@ -91,6 +92,7 @@ func _check_fall_through_floor():
 
 func _check_health_removed():
 	if current_health <= 0:
+		hero_obj.get_node('KillSound').play()
 		self.kill_enemy()
 
 func register_spawn():
