@@ -2,13 +2,16 @@ extends RigidBody
 
 export(String, "melee", "ranged") var attack_type = "melee"
 export(float) var attack_range = 0.25
-export(float) var attack_time = 1.5
+export(float) var attack_time = 0.75
 export(float) var attack_backswing = 3.0
+export(int) var health = 1
+export(int) var armor = 1
 
 var is_attacking = false
 var is_backswing = false
 
 var hero_obj = null
+var spawner = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,6 +58,13 @@ func _attempt_attack():
 		arrow.global_transform.origin = self.global_transform.origin
 		
 
+func kill_enemy():
+	for child in self.get_children():
+		child.queue_free()
+	self.queue_free()
+	if spawner != null:
+		spawner.notify_spawn_death(self)
+
 func _check_attack():
 	if is_attacking == false and is_backswing == false:
 		# Check if close enough
@@ -67,9 +77,19 @@ func _check_attack():
 		var anim_pct = 1 - ($AttackTimer.time_left / attack_time)
 	elif is_backswing == true:
 		var anim_pct = 1 - ($BackswingTimer.time_left / attack_time)
-	
+
+func _check_fall_through_floor():
+	if global_transform.origin.y <= -10:
+		# Fell...
+		self.kill_enemy()
+
+func _check_health_removed():
+	if health <= 0:
+		self.kill_enemy()
+
 func _process(delta):
-	pass
+	_check_fall_through_floor()
+	_check_health_removed()
 
 func _on_AttackTimer_timeout():
 	is_attacking = false

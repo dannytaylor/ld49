@@ -1,6 +1,6 @@
 extends Spatial
 
-export(float) var lifetime = 1.66
+export(float) var lifetime = 0.66
 
 
 # Called when the node enters the scene tree for the first time.
