@@ -26,9 +26,14 @@ func _ready():
 	$spawn_timer.start()
 
 func notify_spawn_death(monster):
-	if spawns.has(monster):
-		spawns.remove(monster)
+	var mpath = monster.get_path()
+	if spawns.has(mpath):
+		spawns.erase(mpath)
 		self.remove_child(monster)
+
+func register_spawn_active(monster):
+	var mpath = monster.get_path()
+	spawns.append(mpath)
 
 func _on_spawn_timer_timeout():
 	var spawn_time = spawn_delay + _get_rng_val(spawn_delay * (2.0 / 5.0) * -1.0, spawn_delay * (1.0 / 5.0))
@@ -59,7 +64,7 @@ func _on_spawn_timer_timeout():
 		new_monster.armor = 0
 		new_monster.health = 4
 		new_monster.scale *= 1.50
-	spawns.append(new_monster)
 	get_node(spawn_parent).add_child(new_monster)
 	new_monster.spawner = self
+	new_monster.register_spawn()
 	new_monster.hero_obj = get_node(hero)

@@ -7,6 +7,9 @@ export(float) var attack_backswing = 3.0
 export(int) var health = 1
 export(int) var armor = 1
 
+var current_health = 0
+var current_armor = 0
+
 var is_attacking = false
 var is_backswing = false
 
@@ -18,6 +21,8 @@ func _ready():
 	hero_obj = get_node("../Board/Hero")
 	$AttackTimer.wait_time = attack_time
 	$BackswingTimer.wait_time = attack_backswing
+	current_health = health
+	current_armor = armor
 
 func _hero_in_range():
 	var distance = self.global_transform.origin.distance_squared_to(hero_obj.global_transform.origin)
@@ -43,6 +48,7 @@ func _attempt_attack():
 		var arrow = arrowscn.instance()
 		arrow.look_at(hero_obj.global_transform.origin, Vector3(0, 1, 0))
 		arrow.rotate_object_local(Vector3(0,1,0), 3.14)
+		arrow.target = hero_obj
 		self.get_parent().add_child(arrow)
 		# Create a path for the arrow to follow
 		var midpoint_x = (self.global_transform.origin.x + hero_obj.global_transform.origin.x) / 2
@@ -84,8 +90,20 @@ func _check_fall_through_floor():
 		self.kill_enemy()
 
 func _check_health_removed():
-	if health <= 0:
+	if current_health <= 0:
 		self.kill_enemy()
+
+func register_spawn():
+	spawner.register_spawn_active(self)
+
+func get_hit(dmg):
+	if current_armor > 0:
+		armor -= dmg
+		if armor < 0:
+			armor = 0
+		return
+	current_health -= dmg
+	return
 
 func _process(delta):
 	_check_fall_through_floor()
@@ -97,7 +115,6 @@ func _on_AttackTimer_timeout():
 	_attempt_attack()
 	$BackswingTimer.start()
 
-
 func _on_BackswingTimer_timeout():
 	is_attacking = false
 	is_backswing = false
@@ -105,3 +122,8 @@ func _on_BackswingTimer_timeout():
 
 func _on_CheckTimer_timeout():
 	_check_attack()
+
+func _on_ArmorUp_timeout():
+	current_armor += 1
+	if current_armor > armor:
+		current_armor = armor

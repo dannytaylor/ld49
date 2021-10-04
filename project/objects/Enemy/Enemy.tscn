@@ -54,6 +54,11 @@ one_shot = true
 [node name="CheckTimer" type="Timer" parent="."]
 autostart = true
 
+[node name="ArmorUp" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="BackswingTimer" to="." method="_on_BackswingTimer_timeout"]
 [connection signal="timeout" from="CheckTimer" to="." method="_on_CheckTimer_timeout"]
+[connection signal="timeout" from="ArmorUp" to="." method="_on_ArmorUp_timeout"]

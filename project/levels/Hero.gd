@@ -71,7 +71,7 @@ func _attack_single_enemy():
 		return
 	
 	# Attack the enemy
-	print("Attacking enemy: " + closest_enemy.to_string())
+
 	var slashscn = load("res://objects/attacks/slash.tscn")
 	var slash = slashscn.instance()
 	$HeroMesh/AnimationPlayer.stop()
@@ -80,17 +80,22 @@ func _attack_single_enemy():
 	slash.global_transform.origin = self.global_transform.origin
 	slash.look_at(closest_enemy.global_transform.origin, Vector3(0, 1, 0))
 	slash.rotate_object_local(Vector3(0,1,0), 3.14)
+	
+	closest_enemy.get_hit(1)
 
 func _attack_all_enemies():
 	# Hit 'em all
 	var enemies = _get_melee_enemies()
 	for enemy in enemies:
-		print("Attacking enemy: " + enemy.to_string())
+		enemy.get_hit(3)
 	var spinscn = load("res://objects/attacks/spin.tscn")
 	var spin = spinscn.instance()
 	spin.global_transform.origin = self.global_transform.origin
 	self.get_parent().add_child(spin)
 	$HeroMesh/AnimationPlayer.play("spin",-1,2)
+
+func get_hit(dmg):
+	print("I got hit")
 
 func _attack_enemy_with_bow():
 	var enemies = _get_ranged_enemies()
@@ -105,7 +110,7 @@ func _attack_enemy_with_bow():
 		# Nothing to do...
 		return
 	
-	print("Attacking enemy: " + furthest_enemy.to_string())
+
 	var arrowscn = load("res://objects/attacks/arrow.tscn")
 	var arrow = arrowscn.instance()
 	self.get_parent().add_child(arrow)
@@ -121,6 +126,7 @@ func _attack_enemy_with_bow():
 	
 	arrow.get_path().curve = curve
 	arrow.global_transform.origin = self.global_transform.origin
+	arrow.target = furthest_enemy
 
 func _input(event):
 	if event is InputEventMouseButton:
