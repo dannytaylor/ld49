@@ -1,6 +1,6 @@
 extends Spatial
 
-export(float) var lifetime = 0.20
+export(float) var lifetime = 0.3
 export(float) var max_size = 1
 
 

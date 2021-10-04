@@ -119,7 +119,14 @@ func _attack_single_enemy():
 	
 	# Attack the enemy
 
-	var slashscn = load("res://objects/attacks/slash.tscn")
+	var use_poke = true
+	if randi() % 2:
+		use_poke = false 
+	var slashscn = null
+	if use_poke:
+		slashscn = load("res://objects/attacks/poke.tscn")
+	else:
+		slashscn = load("res://objects/attacks/slash.tscn")
 	var slash = slashscn.instance()
 	$HeroMesh/AnimationPlayer.stop()
 	$HeroMesh/AnimationPlayer.play("attack",-1,2)

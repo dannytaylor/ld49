@@ -2,7 +2,7 @@
 
 [ext_resource path="res://objects/attacks/slash.gd" type="Script" id=1]
 [ext_resource path="res://assets/meshes/sword-slash.glb" type="PackedScene" id=2]
-[ext_resource path="res://assets/meshes/red_flat.tres" type="Material" id=3]
+[ext_resource path="res://assets/meshes/blue_flat.tres" type="Material" id=4]
 
 [sub_resource type="PrismMesh" id=1]
 size = Vector3( 2, 3, 2 )
@@ -48,11 +48,15 @@ transform = Transform( -0.33, 0, -2.88495e-08, 0, 0.33, 0, 2.88495e-08, 0, -0.33
 [node name="Null_Sword_Swoosh" parent="sword-slash" index="1"]
 transform = Transform( -1.19209e-09, -4.37114e-10, 0.01, 1.77636e-17, 0.01, 4.37114e-10, -0.01, 8.88178e-17, -1.19209e-09, 0, 1.78952, 0 )
 
+[node name="Swoosh" parent="sword-slash/Null_Sword_Swoosh" index="0"]
+visible = false
+
 [node name="Sword_Blade" parent="sword-slash/Null_Sword_Swoosh" index="1"]
-material/0 = ExtResource( 3 )
+transform = Transform( 1, 0, 1.42109e-14, 0, 1, -2.23339e-21, -1.42109e-14, -3.55272e-15, 1, -4.76837e-07, 0, -155.109 )
+material/0 = ExtResource( 4 )
 
 [node name="Sword_Handle" parent="sword-slash/Null_Sword_Swoosh" index="2"]
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 4 )
 
 [node name="AnimationPlayer" parent="sword-slash" index="2"]
 autoplay = "Null_Sword_Swoosh|CINEMA_4D_Main|Layer0"

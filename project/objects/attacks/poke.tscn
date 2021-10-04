@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://objects/attacks/slash.gd" type="Script" id=1]
-[ext_resource path="res://assets/meshes/sword-slash.glb" type="PackedScene" id=2]
+[ext_resource path="res://assets/meshes/sword-poke.glb" type="PackedScene" id=2]
 [ext_resource path="res://assets/meshes/red_flat.tres" type="Material" id=3]
 
 [sub_resource type="PrismMesh" id=1]
@@ -23,8 +23,23 @@ scale_random = 0.13
 [sub_resource type="PrismMesh" id=4]
 size = Vector3( 0.03, 0.03, 0.03 )
 
-[node name="Slash" type="Spatial"]
+[node name="Poke" type="Spatial"]
 script = ExtResource( 1 )
+
+[node name="sword-poke" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.33, 0, -2.88495e-08, 0, 0.33, 0, 2.88495e-08, 0, -0.33, 0, -0.458305, 0.268378 )
+
+[node name="Null_Sword_Poke" parent="sword-poke" index="1"]
+transform = Transform( 0.01, 0, 0, 0, 0.01, 4.37114e-10, 0, -4.37114e-10, 0.01, 0, 1.78952, 0 )
+
+[node name="Sword_Blade" parent="sword-poke/Null_Sword_Poke" index="0"]
+material/0 = ExtResource( 3 )
+
+[node name="Sword_Handle" parent="sword-poke/Null_Sword_Poke" index="1"]
+material/0 = ExtResource( 3 )
+
+[node name="AnimationPlayer" parent="sword-poke" index="2"]
+autoplay = "Null_Sword_Poke|CINEMA_4D_Main|Layer0"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.2, 0, 0, 0, -8.74228e-09, -0.05, 0, 0.2, -2.18557e-09, 0, 0, 0.158127 )
@@ -42,21 +57,6 @@ draw_pass_1 = SubResource( 4 )
 
 [node name="Lifetime" type="Timer" parent="."]
 
-[node name="sword-slash" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.33, 0, -2.88495e-08, 0, 0.33, 0, 2.88495e-08, 0, -0.33, 0, 0, 0.0204492 )
-
-[node name="Null_Sword_Swoosh" parent="sword-slash" index="1"]
-transform = Transform( -1.19209e-09, -4.37114e-10, 0.01, 1.77636e-17, 0.01, 4.37114e-10, -0.01, 8.88178e-17, -1.19209e-09, 0, 1.78952, 0 )
-
-[node name="Sword_Blade" parent="sword-slash/Null_Sword_Swoosh" index="1"]
-material/0 = ExtResource( 3 )
-
-[node name="Sword_Handle" parent="sword-slash/Null_Sword_Swoosh" index="2"]
-material/0 = ExtResource( 3 )
-
-[node name="AnimationPlayer" parent="sword-slash" index="2"]
-autoplay = "Null_Sword_Swoosh|CINEMA_4D_Main|Layer0"
-
 [connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]
 
-[editable path="sword-slash"]
+[editable path="sword-poke"]

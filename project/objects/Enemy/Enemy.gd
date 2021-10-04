@@ -37,10 +37,12 @@ func _attempt_attack():
 		# Can't attack, we're done here
 		return
 	
+	$baddie01_mesh/AnimationPlayer.play("Attack|mixamocom|Layer0")
+	$baddie02_mesh/AnimationPlayer.play("Armature|CINEMA_4D_Main|Layer0")
 	if attack_type == "melee":
-		var slashscn = load("res://objects/attacks/slash.tscn")
+		var slashscn = load("res://objects/attacks/slash-enemy.tscn")
 		var slash = slashscn.instance()
-		$baddie01_mesh/AnimationPlayer.play("Attack|mixamocom|Layer0")
+		$EnemyHit.play()
 		slash.global_transform.origin = self.global_transform.origin
 		slash.look_at(hero_obj.global_transform.origin, Vector3(0, 1, 0))
 		slash.rotate_object_local(Vector3(0,1,0), 3.14)

@@ -50,7 +50,7 @@ corner_detail = 16
 bg_color = Color( 0.0823529, 0.537255, 0.407843, 1 )
 border_color = Color( 0.741176, 0.121569, 0.247059, 1 )
 
-[node name="Spatial" type="Spatial"]
+[node name="Spatial2" type="Spatial"]
 
 [node name="Board" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12933, 0 )

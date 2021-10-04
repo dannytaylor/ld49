@@ -62,6 +62,14 @@ func _on_spawn_timer_timeout():
 	# Spawn something!
 	var new_monster = null
 	new_monster = monster_scene.instance()
+	var use_model1 = true # randomize model visibility
+	if randi() % 2:
+		use_model1 = false 
+	if use_model1:
+		new_monster.get_node("baddie02_mesh").visible = false
+	else:
+		new_monster.get_node("baddie01_mesh").visible = false
+		
 	new_monster.global_transform  = $spawn_location.global_transform 
 	if enemy_type == "goblin":
 		# Do nothing extra
