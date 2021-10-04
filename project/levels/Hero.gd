@@ -20,8 +20,6 @@ func _colorize_gui():
 	
 	var atk_red = atkpct
 	var atk_green = 1 - atkpct
-	if atk_green != 0:
-		print(atk_green)
 	var atk_blue = 0.0
 	if attack_charged:
 		atk_red = 1

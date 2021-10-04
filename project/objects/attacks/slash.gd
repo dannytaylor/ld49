@@ -1,7 +1,7 @@
 extends Spatial
 
-export(float) var lifetime = 0.20
-export(float) var speed = 4.0
+export(float) var lifetime = 0.10
+export(float) var speed = 5.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

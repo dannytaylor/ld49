@@ -20,8 +20,7 @@ func _get_rng_val(minval, maxval):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.randomize()
-	if enemy_type == "goblin" or enemy_type == "hobgoblin" or enemy_type == "ogre":
-		monster_scene = load("res://objects/Enemy/Enemy.tscn")
+	monster_scene = load("res://objects/Enemy/Enemy.tscn")
 	# First spawn is either a quarter of the duration or 4/5ths at most
 	$spawn_timer.wait_time = 1 + _get_rng_val(0.25, 1)
 	$spawn_timer.start()
@@ -43,7 +42,23 @@ func _on_spawn_timer_timeout():
 	# Spawn something!
 	var new_monster = null
 	new_monster = monster_scene.instance()
-	get_node(spawn_parent).add_child(new_monster)
 	new_monster.global_transform  = $spawn_location.global_transform 
+	if enemy_type == "goblin":
+		# Do nothing extra
+		pass
+	if enemy_type == "hobgoblin":
+		# Ranged enemy
+		new_monster.attack_range = 7.0
+		new_monster.attack_time = 4.0
+		new_monster.attack_backswing = 7.0
+		new_monster.attack_type = "ranged"
+		new_monster.scale *= 1.20
+	if enemy_type == "ogre":
+		new_monster.attack_time = 1.5
+		new_monster.attack_backswing = 2
+		new_monster.armor = 0
+		new_monster.health = 4
+		new_monster.scale *= 1.50
 	spawns.append(new_monster)
-	
+	get_node(spawn_parent).add_child(new_monster)
+	new_monster.spawner = self

@@ -41,8 +41,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 mesh = SubResource( 5 )
 
 [node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="BackswingTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="CheckTimer" type="Timer" parent="."]
 autostart = true
