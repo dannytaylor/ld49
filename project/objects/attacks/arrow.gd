@@ -1,7 +1,7 @@
 extends Spatial
 
 export(float) var lifetime = 0.66
-export(float) var radius  = 0.1
+export(float) var radius  = 0.25
 
 var target = null
 

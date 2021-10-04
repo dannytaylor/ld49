@@ -7,9 +7,14 @@ var maxhp = 100
 var health = maxhp
 var level = 1
 
+var num_clears = 0 setget _set_numclears
+
+var unlock_level = 0
+var extra_damage = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	_check_unlocks()
 
 func _process(delta):
 	_colorize_gui()
@@ -25,7 +30,7 @@ func _colorize_gui():
 	var atk_red = atkpct
 	var atk_green = 1 - atkpct
 	var atk_blue = 0.0
-	if attack_charged:
+	if attack_charged or unlock_level < 2:
 		atk_red = 0.0
 		atk_green = 0.0
 		atk_blue = 0.0
@@ -44,6 +49,54 @@ func _colorize_gui():
 	$BowCharge/ColorRect.color.g = bow_green
 	$BowCharge/ColorRect.color.b = bow_blue
 
+func _set_health(_health):
+	health = _health
+	get_tree().get_root().get_node("Spatial/UI/HealthBar").value = health
+	var notifyscene = load("res://objects/Player/notify.tscn")
+	var hurt = notifyscene.instance()
+	hurt.set_modulate(Color(1, 0, 0))
+	hurt.set_label("HEALTH -1")
+	self.add_child(hurt)
+
+func _set_level(_level):
+	level = _level
+	get_tree().get_root().get_node("Spatial/UI/XPBar").value = level
+	
+	var notifyscene = load("res://objects/Player/notify.tscn")
+	var help = notifyscene.instance()
+	help.set_modulate(Color(0, 1, 0))
+	help.set_label("EXPERIENCE +1")
+	self.add_child(help)
+	
+	if level == 6:
+		unlock_level += 1
+		_check_unlocks()
+		_set_level(1)
+
+func _set_numclears(_numclears):
+	num_clears = _numclears
+	if num_clears == 3:
+		# win!
+		print("winner")
+
+func _check_unlocks():
+	if unlock_level >= 0:
+		$BowCharge.visible = false
+		$SwordCharge.visible = true
+		# Do nothing
+		pass
+	if unlock_level >= 1:
+		# Bow and arrow
+		$BowCharge.visible = true
+		pass
+	if unlock_level >= 2:
+		# Spin
+		pass
+	if unlock_level >= 3:
+		# Extra sword damage?
+		extra_damage = unlock_level - 2
+		pass
+	
 
 func _get_melee_enemies():
 	return $AttackZone.get_overlapping_bodies()
@@ -76,13 +129,15 @@ func _attack_single_enemy():
 	slash.look_at(closest_enemy.global_transform.origin, Vector3(0, 1, 0))
 	slash.rotate_object_local(Vector3(0,1,0), 3.14)
 	
-	closest_enemy.get_hit(1)
+	closest_enemy.get_hit(1 + extra_damage)
 
 func _attack_all_enemies():
+	if unlock_level < 2:
+		return
 	# Hit 'em all
 	var enemies = _get_melee_enemies()
 	for enemy in enemies:
-		enemy.get_hit(3)
+		enemy.get_hit(3 + extra_damage)
 	var spinscn = load("res://objects/attacks/spin.tscn")
 	var spin = spinscn.instance()
 	spin.global_transform.origin = self.global_transform.origin
@@ -91,10 +146,11 @@ func _attack_all_enemies():
 	$HitSound.play()
 
 func get_hit(dmg):
-	print("I got hit")
-	get_tree().get_root().get_node("Spatial/UI/HealthBar").value = health - dmg
+	self.health -= dmg
 
 func _attack_enemy_with_bow():
+	if unlock_level < 1:
+		return
 	var enemies = _get_ranged_enemies()
 	var furthest_distance = -INF
 	var furthest_enemy = null

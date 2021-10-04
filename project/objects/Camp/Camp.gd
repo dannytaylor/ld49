@@ -11,6 +11,7 @@ export(NodePath) var hero
 var spawns = []
 var monster_scene = null
 var rng = RandomNumberGenerator.new()
+var billboard = null
 
 func _get_rng_val(minval, maxval):
 	rng.randomize()
@@ -24,12 +25,26 @@ func _ready():
 	# First spawn is either a quarter of the duration or 4/5ths at most
 	$spawn_timer.wait_time = 1 + _get_rng_val(0.25, 1)
 	$spawn_timer.start()
+	
+	var billboardscene = load("res://objects/Player/billboard.tscn")
+	billboard = billboardscene.instance()
+	billboard.set_label("REMAINING: " + String(total_enemies))
+	self.add_child(billboard)
+	billboard.translate(Vector3(0, 0, 2))
 
-func notify_spawn_death(monster):
+func notify_spawn_death(monster, reduce_count):
 	var mpath = monster.get_path()
 	if spawns.has(mpath):
 		spawns.erase(mpath)
 		self.remove_child(monster)
+	if reduce_count:
+		self.total_enemies -= 1
+		billboard.set_label("REMAINING: " + String(total_enemies))
+		_check_empty()
+
+func _check_empty():
+	if total_enemies == 0:
+		hero.num_clears += 1
 
 func register_spawn_active(monster):
 	var mpath = monster.get_path()
@@ -53,7 +68,7 @@ func _on_spawn_timer_timeout():
 		pass
 	if enemy_type == "hobgoblin":
 		# Ranged enemy
-		new_monster.attack_range = 7.0
+		new_monster.attack_range = 15.0
 		new_monster.attack_time = 2.0
 		new_monster.attack_backswing = 4.0
 		new_monster.attack_type = "ranged"
@@ -64,6 +79,7 @@ func _on_spawn_timer_timeout():
 		new_monster.armor = 0
 		new_monster.health = 4
 		new_monster.scale *= 1.50
+		new_monster.damage *= 2
 	get_node(spawn_parent).add_child(new_monster)
 	new_monster.spawner = self
 	new_monster.register_spawn()

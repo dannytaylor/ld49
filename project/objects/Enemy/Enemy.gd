@@ -1,11 +1,12 @@
 extends RigidBody
 
 export(String, "melee", "ranged") var attack_type = "melee"
-export(float) var attack_range = 0.25
+export(float) var attack_range = 4.5
 export(float) var attack_time = 0.75
 export(float) var attack_backswing = 3.0
 export(int) var health = 1
 export(int) var armor = 1
+export(int) var damage = 2
 
 var current_health = 0
 var current_armor = 0
@@ -44,6 +45,7 @@ func _attempt_attack():
 		slash.look_at(hero_obj.global_transform.origin, Vector3(0, 1, 0))
 		slash.rotate_object_local(Vector3(0,1,0), 3.14)
 		self.get_parent().add_child(slash)
+		hero_obj.get_hit(damage)
 	if attack_type == "ranged":
 		var arrowscn = load("res://objects/attacks/arrow.tscn")
 		var arrow = arrowscn.instance()
@@ -65,12 +67,15 @@ func _attempt_attack():
 		arrow.global_transform.origin = self.global_transform.origin
 		
 
-func kill_enemy():
+func kill_enemy(award_xp):
 	for child in self.get_children():
 		child.queue_free()
 	self.queue_free()
 	if spawner != null:
-		spawner.notify_spawn_death(self)
+		spawner.notify_spawn_death(self, award_xp)
+	if hero_obj != null:
+		if award_xp:
+			hero_obj.level += 1
 
 func _check_attack():
 	if is_attacking == false and is_backswing == false:
@@ -88,12 +93,12 @@ func _check_attack():
 func _check_fall_through_floor():
 	if global_transform.origin.y <= -10:
 		# Fell...
-		self.kill_enemy()
+		self.kill_enemy(false)
 
 func _check_health_removed():
 	if current_health <= 0:
+		self.kill_enemy(true)
 		hero_obj.get_node('KillSound').play()
-		self.kill_enemy()
 
 func register_spawn():
 	spawner.register_spawn_active(self)
