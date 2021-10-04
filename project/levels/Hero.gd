@@ -3,7 +3,7 @@ extends MeshInstance
 var attack_charged = false
 var bow_charged = false
 
-export(float) var health = 100.0 setget _set_health
+export(float) var health = 50.0 setget _set_health
 export(float) var level = 0 setget _set_level
 
 var num_clears = 0 setget _set_numclears
@@ -49,13 +49,17 @@ func _colorize_gui():
 	$BowCharge/ColorRect.color.b = bow_blue
 
 func _set_health(_health):
+	var diff = health - _health
 	health = _health
 	get_tree().get_root().get_node("Spatial/UI/HealthBar").value = health
 	var notifyscene = load("res://objects/Player/notify.tscn")
 	var hurt = notifyscene.instance()
 	hurt.set_modulate(Color(1, 0, 0))
-	hurt.set_label("HEALTH -1")
+	hurt.set_label("HEALTH -" + String(diff))
 	self.add_child(hurt)
+	
+	if health <= 0:
+		print("LOSER")
 
 func _set_level(_level):
 	level = _level

@@ -103,9 +103,9 @@ func register_spawn():
 
 func get_hit(dmg):
 	if current_armor > 0:
-		armor -= dmg
-		if armor < 0:
-			armor = 0
+		current_armor -= dmg
+		if current_armor < 0:
+			current_armor = 0
 		return
 	current_health -= dmg
 	return
