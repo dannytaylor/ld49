@@ -8,7 +8,9 @@
 
 [sub_resource type="QuadMesh" id=3]
 
-[node name="Enemy" type="RigidBody"]
+[node name="Enemy" type="RigidBody" groups=[
+"enemy",
+]]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

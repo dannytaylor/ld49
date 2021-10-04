@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/images/black_circle.png" type="Texture" id=1]
+[ext_resource path="res://objects/Board/Hole.gd" type="Script" id=2]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 1.2
 
-[node name="hole" type="Area"]
+[node name="hole" type="Area" groups=[
+"hole",
+]]
 transform = Transform( 0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0.320212, 0 )
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
@@ -14,3 +18,5 @@ shape = SubResource( 1 )
 [node name="Sprite3D" type="Sprite3D" parent="."]
 axis = 1
 texture = ExtResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_hole_body_entered"]
