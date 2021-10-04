@@ -76,6 +76,8 @@ func _attack_single_enemy():
 	print("Attacking enemy: " + closest_enemy.to_string())
 	var slashscn = load("res://objects/attacks/slash.tscn")
 	var slash = slashscn.instance()
+	$HeroMesh/AnimationPlayer.stop()
+	$HeroMesh/AnimationPlayer.play("attack",-1,2)
 	self.get_parent().add_child(slash)
 	slash.global_transform.origin = self.global_transform.origin
 	slash.look_at(closest_enemy.global_transform.origin, Vector3(0, 1, 0))
@@ -90,6 +92,7 @@ func _attack_all_enemies():
 	var spin = spinscn.instance()
 	spin.global_transform.origin = self.global_transform.origin
 	self.get_parent().add_child(spin)
+	$HeroMesh/AnimationPlayer.play("spin",-1,2)
 
 func _attack_enemy_with_bow():
 	var enemies = _get_ranged_enemies()

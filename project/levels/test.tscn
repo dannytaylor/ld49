@@ -474,7 +474,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.588233, 0.633058, -0.571428
 
 [node name="Enemy2" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.716577, 0.633058, -1.38698 )
-attack_range = 3.0
 
 [connection signal="timeout" from="Hero/AttackChargeTimer" to="Hero" method="_on_AttackChargeTimer_timeout"]
 [connection signal="timeout" from="Hero/BowChargeTimer" to="Hero" method="_on_BowChargeTimer_timeout"]
