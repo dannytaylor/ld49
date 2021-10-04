@@ -44,7 +44,7 @@ func notify_spawn_death(monster, reduce_count):
 
 func _check_empty():
 	if total_enemies == 0:
-		hero.num_clears += 1
+		get_node(hero).num_clears += 1
 
 func register_spawn_active(monster):
 	var mpath = monster.get_path()
@@ -57,6 +57,8 @@ func _on_spawn_timer_timeout():
 	
 	# Should we spawn anything?
 	if spawns.size() >= max_simul:
+		return
+	if total_enemies <= 0:
 		return
 	
 	# Spawn something!
@@ -84,10 +86,10 @@ func _on_spawn_timer_timeout():
 	if enemy_type == "ogre":
 		new_monster.attack_time = 1.5
 		new_monster.attack_backswing = 2
-		new_monster.armor = 0
-		new_monster.health = 4
+		new_monster.armor = 2
+		new_monster.health = 5
 		new_monster.scale *= 1.50
-		new_monster.damage *= 2
+		new_monster.damage *= 3
 	get_node(spawn_parent).add_child(new_monster)
 	new_monster.spawner = self
 	new_monster.register_spawn()
