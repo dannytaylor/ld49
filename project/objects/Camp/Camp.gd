@@ -54,8 +54,8 @@ func _on_spawn_timer_timeout():
 	if enemy_type == "hobgoblin":
 		# Ranged enemy
 		new_monster.attack_range = 7.0
-		new_monster.attack_time = 4.0
-		new_monster.attack_backswing = 7.0
+		new_monster.attack_time = 2.0
+		new_monster.attack_backswing = 4.0
 		new_monster.attack_type = "ranged"
 		new_monster.scale *= 1.20
 	if enemy_type == "ogre":

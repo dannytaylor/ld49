@@ -47,9 +47,8 @@ func _attempt_attack():
 		var arrowscn = load("res://objects/attacks/arrow.tscn")
 		var arrow = arrowscn.instance()
 		arrow.look_at(hero_obj.global_transform.origin, Vector3(0, 1, 0))
-		arrow.rotate_object_local(Vector3(0,1,0), 3.14)
+		#arrow.rotate_object_local(Vector3(0,1,0), 3.14)
 		arrow.target = hero_obj
-		self.get_parent().add_child(arrow)
 		# Create a path for the arrow to follow
 		var midpoint_x = (self.global_transform.origin.x + hero_obj.global_transform.origin.x) / 2
 		var midpoint_z = (self.global_transform.origin.z + hero_obj.global_transform.origin.z) / 2
@@ -59,8 +58,9 @@ func _attempt_attack():
 		curve.add_point(hero_obj.global_transform.origin)
 		curve.add_point(Vector3(midpoint_x, hero_obj.global_transform.origin.y + 1, midpoint_z))
 		curve.add_point(self.global_transform.origin)
-		
 		arrow.get_path().curve = curve
+		
+		self.get_parent().add_child(arrow)
 		arrow.global_transform.origin = self.global_transform.origin
 		
 

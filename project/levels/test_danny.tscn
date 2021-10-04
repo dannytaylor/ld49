@@ -70,7 +70,7 @@ hero = NodePath("../Hero")
 [node name="SouthCamp" parent="Board" instance=ExtResource( 1 )]
 transform = Transform( -0.596603, 0, -0.802536, 0, 1, 0, 0.802536, 0, -0.596603, 4.67133, -0.12933, 4.55424 )
 camp_name = "North Camp"
-enemy_type = "hobgoblin"
+enemy_type = "goblin"
 spawn_parent = NodePath("../../..")
 hero = NodePath("../Hero")
 
