@@ -62,3 +62,4 @@ func _on_spawn_timer_timeout():
 	spawns.append(new_monster)
 	get_node(spawn_parent).add_child(new_monster)
 	new_monster.spawner = self
+	new_monster.hero_obj = get_node(hero)

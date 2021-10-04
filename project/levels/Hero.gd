@@ -25,9 +25,9 @@ func _colorize_gui():
 	var atk_green = 1 - atkpct
 	var atk_blue = 0.0
 	if attack_charged:
-		atk_red = 1
-		atk_green = 1
-		atk_blue = 1
+		atk_red = 0.0
+		atk_green = 0.0
+		atk_blue = 0.0
 	$SwordCharge/ColorRect.color.r = atk_red
 	$SwordCharge/ColorRect.color.g = atk_green
 	$SwordCharge/ColorRect.color.b = atk_blue
@@ -36,9 +36,9 @@ func _colorize_gui():
 	var bow_green = 1 - bowpct
 	var bow_blue = 0.0
 	if bow_charged:
-		bow_red = 1
-		bow_green = 1
-		bow_blue = 1
+		bow_red = 0.0
+		bow_green = 0.0
+		bow_blue = 0.0
 	$BowCharge/ColorRect.color.r = bow_red
 	$BowCharge/ColorRect.color.g = bow_green
 	$BowCharge/ColorRect.color.b = bow_blue
@@ -105,6 +105,7 @@ func _attack_enemy_with_bow():
 		# Nothing to do...
 		return
 	
+	print("Attacking enemy: " + furthest_enemy.to_string())
 	var arrowscn = load("res://objects/attacks/arrow.tscn")
 	var arrow = arrowscn.instance()
 	self.get_parent().add_child(arrow)

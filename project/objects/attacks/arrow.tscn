@@ -2,23 +2,23 @@
 
 [ext_resource path="res://objects/attacks/arrow.gd" type="Script" id=1]
 
-[sub_resource type="Curve3D" id=6]
+[sub_resource type="Curve3D" id=1]
 _data = {
 "points": PoolVector3Array(  ),
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="CylinderMesh" id=7]
+[sub_resource type="CylinderMesh" id=2]
 
-[sub_resource type="SpatialMaterial" id=8]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="CubeMesh" id=9]
+[sub_resource type="CubeMesh" id=4]
 
-[sub_resource type="SpatialMaterial" id=10]
+[sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="PrismMesh" id=11]
+[sub_resource type="PrismMesh" id=6]
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
@@ -27,24 +27,24 @@ script = ExtResource( 1 )
 one_shot = true
 
 [node name="ArrowPath" type="Path" parent="."]
-curve = SubResource( 6 )
+curve = SubResource( 1 )
 
 [node name="PathFollow" type="PathFollow" parent="ArrowPath"]
 loop = false
 
 [node name="shaft" type="MeshInstance" parent="ArrowPath/PathFollow"]
-transform = Transform( 0.01, 0, 0, 0, 0.1, 0, 0, 0, 0.01, 0, 0, 0 )
-mesh = SubResource( 7 )
-material/0 = SubResource( 8 )
+transform = Transform( 0.05, 0, 0, 0, 0.2, 0, 0, 0, 0.05, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
 
 [node name="feather" type="MeshInstance" parent="ArrowPath/PathFollow/shaft"]
 transform = Transform( 0.33, 0, 0, 0, 0.33, 0, 0, 0, 5, 0, -0.66, 0 )
-mesh = SubResource( 9 )
-material/0 = SubResource( 10 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="tip" type="MeshInstance" parent="ArrowPath/PathFollow/shaft"]
 transform = Transform( 1, 0, 0, 0, 0.33, 0, 0, 0, 1, 0, 1.2, 0 )
-mesh = SubResource( 11 )
+mesh = SubResource( 6 )
 material/0 = null
 
 [connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]

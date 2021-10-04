@@ -15,7 +15,7 @@ var spawner = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hero_obj = get_node("../Hero")
+	hero_obj = get_node("../Board/Hero")
 	$AttackTimer.wait_time = attack_time
 	$BackswingTimer.wait_time = attack_backswing
 
