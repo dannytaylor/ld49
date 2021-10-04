@@ -113,36 +113,20 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == 1:
 			if event.pressed == true:
-				# Sword pressed
-				_attack_single_enemy()
-				attack_charged = false
-				$AttackChargeTimer.start()
-			else:
-				$AttackChargeTimer.stop()
-				# Charged?
-				if attack_charged == true:
-					# spin attack
+				if attack_charged:
 					_attack_all_enemies()
 				else:
-					# Not long enough
-					pass
+					_attack_single_enemy()
 				attack_charged = false
+				$AttackChargeTimer.stop()
+				$AttackChargeTimer.start()
 		if event.button_index == 2:
 			if event.pressed == true:
-				# Start charging bow
-				bow_charged = false
-				$BowChargeTimer.start()
-			else:
-				# Stop charging bow
-				$BowChargeTimer.stop()
-				if bow_charged == true:
-					# spin attack
+				if bow_charged:
 					_attack_enemy_with_bow()
-				else:
-					# Not long enough
-					pass
-				bow_charged = false
-
+					bow_charged = false
+					$BowChargeTimer.stop()
+					$BowChargeTimer.start()
 
 func _on_AttackChargeTimer_timeout():
 	attack_charged = true
