@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://objects/Board/Board.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/Player/Camera.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://objects/Enemy/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/Camp/Camp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://levels/Hero.gd" type="Script" id=6]
+[ext_resource path="res://assets/meshes/player_mesh.tscn" type="PackedScene" id=7]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -16,7 +17,7 @@
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 15, 15, 2 )
 
-[node name="Spatial" type="Spatial"]
+[node name="Spatial2" type="Spatial"]
 
 [node name="Board" parent="." instance=ExtResource( 1 )]
 
@@ -408,6 +409,9 @@ transform = Transform( 0.15, 0, 0, 0, -6.55671e-09, -0.15, 0, 0.15, -6.55671e-09
 mesh = SubResource( 3 )
 material/0 = null
 script = ExtResource( 6 )
+
+[node name="HeroMesh" parent="Hero" instance=ExtResource( 7 )]
+transform = Transform( 6.66667, 0, 0, 0, -2.91409e-07, 6.66667, 0, -6.66667, -2.91409e-07, 0, 5.70489e-08, 1.30513 )
 
 [node name="SwordCharge" type="Label" parent="Hero"]
 margin_right = 101.0
