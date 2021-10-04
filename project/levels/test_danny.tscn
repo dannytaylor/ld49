@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://objects/Camp/Camp.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/Hero.gd" type="Script" id=2]
@@ -17,8 +17,12 @@
 [ext_resource path="res://assets/meshes/barrier.tscn" type="PackedScene" id=15]
 [ext_resource path="res://objects/Board/Hole.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/images/high-shot.png" type="Texture" id=17]
-[ext_resource path="res://assets/images/two-handed-sword.png" type="Texture" id=18]
+[ext_resource path="res://assets/images/broad-dagger.png" type="Texture" id=18]
 [ext_resource path="res://assets/audio/hit.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/font32.tres" type="DynamicFont" id=20]
+[ext_resource path="res://assets/images/mouseLeft.png" type="Texture" id=21]
+[ext_resource path="res://assets/images/mouseRight.png" type="Texture" id=22]
+[ext_resource path="res://assets/Aileron-Heavy.otf" type="DynamicFontData" id=23]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 3, 3, 2 )
@@ -41,6 +45,8 @@ ssao_edge_sharpness = 16.0
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.741176, 0.121569, 0.247059, 1 )
 border_color = Color( 0.741176, 0.121569, 0.247059, 1 )
+corner_detail = 1
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.8, 0.886275, 0.882353, 1 )
@@ -50,7 +56,13 @@ corner_detail = 16
 bg_color = Color( 0.0823529, 0.537255, 0.407843, 1 )
 border_color = Color( 0.741176, 0.121569, 0.247059, 1 )
 
-[node name="Spatial2" type="Spatial"]
+[sub_resource type="DynamicFont" id=7]
+size = 128
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 23 )
+
+[node name="Spatial" type="Spatial"]
 
 [node name="Board" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12933, 0 )
@@ -105,20 +117,20 @@ one_shot = true
 autostart = true
 
 [node name="SwordCharge" type="Label" parent="Board/Hero"]
-margin_left = 49.6382
-margin_top = 27.1794
-margin_right = 150.638
-margin_bottom = 41.1794
-text = "Left Click"
+margin_left = 26.3058
+margin_top = -6.22346
+margin_right = 127.306
+margin_bottom = 7.77654
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect" type="ColorRect" parent="Board/Hero/SwordCharge"]
-margin_left = 3.08553
-margin_top = 17.5408
-margin_right = 67.0855
-margin_bottom = 81.5408
+visible = false
+margin_left = 3.48238
+margin_top = 24.0
+margin_right = 67.4824
+margin_bottom = 88.0
 rect_pivot_offset = Vector2( -10.1084, 22.4592 )
 color = Color( 0.92549, 0.380392, 0.290196, 1 )
 __meta__ = {
@@ -126,31 +138,42 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Board/Hero/SwordCharge"]
-margin_left = 9.18402
-margin_top = 23.9278
-margin_right = 521.184
-margin_bottom = 535.928
-rect_scale = Vector2( 0.1, 0.1 )
+margin_left = 14.7399
+margin_top = 37.2132
+margin_right = 526.74
+margin_bottom = 549.213
+rect_scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MouseL" type="TextureRect" parent="Board/Hero/SwordCharge"]
+margin_left = 9.05432
+margin_top = 91.6144
+margin_right = 109.054
+margin_bottom = 191.614
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="BowCharge" type="Label" parent="Board/Hero"]
-margin_left = 140.728
-margin_top = 27.35
-margin_right = 240.728
-margin_bottom = 118.35
-text = "	Right click"
+margin_left = 126.931
+margin_top = -6.05287
+margin_right = 226.931
+margin_bottom = 84.9471
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect" type="ColorRect" parent="Board/Hero/BowCharge"]
-margin_left = 2.37842
-margin_top = 17.5408
-margin_right = 66.3784
-margin_bottom = 81.5408
+visible = false
+margin_left = 7.17474
+margin_top = 24.0
+margin_right = 71.1747
+margin_bottom = 88.0
 rect_pivot_offset = Vector2( -10.1084, 22.4592 )
 color = Color( 0.92549, 0.380392, 0.290196, 1 )
 __meta__ = {
@@ -158,12 +181,23 @@ __meta__ = {
 }
 
 [node name="BowRect" type="TextureRect" parent="Board/Hero/BowCharge"]
-margin_left = 9.35754
-margin_top = 24.704
-margin_right = 521.358
-margin_bottom = 536.704
-rect_scale = Vector2( 0.1, 0.1 )
+margin_left = 18.916
+margin_top = 34.8321
+margin_right = 530.916
+margin_bottom = 546.832
+rect_scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MouseR" type="TextureRect" parent="Board/Hero/BowCharge"]
+margin_left = 14.1018
+margin_top = 91.6144
+margin_right = 114.102
+margin_bottom = 191.614
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 22 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -283,10 +317,10 @@ environment = SubResource( 3 )
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" type="ProgressBar" parent="UI"]
-margin_left = 945.612
-margin_top = 40.0
-margin_right = 1345.61
-margin_bottom = 140.0
+margin_left = 959.0
+margin_top = 36.2245
+margin_right = 1361.0
+margin_bottom = 136.225
 rect_scale = Vector2( 0.5, 0.5 )
 custom_styles/fg = SubResource( 4 )
 custom_styles/bg = SubResource( 5 )
@@ -299,10 +333,10 @@ __meta__ = {
 }
 
 [node name="XPBar" type="ProgressBar" parent="UI"]
-margin_left = 944.63
-margin_top = 108.903
-margin_right = 1344.63
-margin_bottom = 208.903
+margin_left = 961.119
+margin_top = 104.225
+margin_right = 1363.12
+margin_bottom = 204.225
 rect_scale = Vector2( 0.5, 0.5 )
 custom_styles/fg = SubResource( 6 )
 custom_styles/bg = SubResource( 5 )
@@ -313,13 +347,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TexSword" type="TextureRect" parent="UI"]
+[node name="Label" type="Label" parent="UI/XPBar"]
+margin_left = 33.7119
+margin_top = 6.9563
+margin_right = 73.7119
+margin_bottom = 65.9563
+rect_scale = Vector2( 1.2, 1.4 )
+custom_fonts/font = ExtResource( 20 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TexStar" type="TextureRect" parent="UI"]
+visible = false
 anchor_top = -0.00210224
 anchor_bottom = -0.00210224
-margin_left = 953.998
+margin_left = 955.888
 margin_top = 122.063
-margin_right = 1082.0
-margin_bottom = 250.064
+margin_right = 1467.89
+margin_bottom = 634.063
 rect_scale = Vector2( 0.06, 0.06 )
 texture = ExtResource( 11 )
 __meta__ = {
@@ -327,12 +374,61 @@ __meta__ = {
 }
 
 [node name="TexHeart" type="TextureRect" parent="UI"]
-margin_left = 955.461
-margin_top = 50.2024
-margin_right = 1467.46
-margin_bottom = 562.202
+margin_left = 969.755
+margin_top = 46.4269
+margin_right = 1481.75
+margin_bottom = 558.427
 rect_scale = Vector2( 0.06, 0.06 )
 texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndCard" type="ColorRect" parent="UI"]
+margin_right = 1200.0
+margin_bottom = 798.0
+color = Color( 1, 1, 1, 0.25098 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndText" type="Label" parent="UI/EndCard"]
+margin_left = -3.77551
+margin_top = 292.107
+margin_right = 1199.22
+margin_bottom = 447.107
+rect_pivot_offset = Vector2( 475.141, 207.554 )
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "YOU WON!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartText" type="Label" parent="UI/EndCard"]
+margin_left = -3.77551
+margin_top = 441.394
+margin_right = 1199.22
+margin_bottom = 596.394
+rect_pivot_offset = Vector2( 475.141, 207.554 )
+custom_fonts/font = ExtResource( 20 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "'R' TO RESTART"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndTimer" type="Label" parent="UI/EndCard"]
+margin_left = -4.0
+margin_top = 242.539
+margin_right = 1199.0
+margin_bottom = 301.539
+rect_pivot_offset = Vector2( 475.141, 207.554 )
+custom_fonts/font = ExtResource( 20 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

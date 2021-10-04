@@ -9,7 +9,7 @@
 [node name="hole" type="Area" groups=[
 "hole",
 ]]
-transform = Transform( 0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0.320212, 0 )
+transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.320212, 0 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

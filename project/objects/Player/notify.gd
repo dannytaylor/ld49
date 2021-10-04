@@ -49,3 +49,4 @@ func _on_Timer_timeout():
 
 func set_modulate(color):
 	$Sprite3D.modulate = color
+	$Sprite3D/Label.set("custom_colors/font_color",color)

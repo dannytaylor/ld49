@@ -54,21 +54,24 @@ func _set_health(_health):
 	get_tree().get_root().get_node("Spatial/UI/HealthBar").value = health
 	var notifyscene = load("res://objects/Player/notify.tscn")
 	var hurt = notifyscene.instance()
-	hurt.set_modulate(Color(1, 0, 0))
-	hurt.set_label("HEALTH -" + String(diff))
+	hurt.set_modulate(Color("bd1f3f"))
+	hurt.set_label("-" + String(diff))
 	self.add_child(hurt)
 	
 	if health <= 0:
 		print("LOSER")
+		get_tree().get_root().get_node("Spatial/UI/EndCard/EndText").text = 'YOU DIED'
+		get_tree().get_root().get_node("Spatial/UI/EndCard").visible = true
 
 func _set_level(_level):
 	level = _level
 	get_tree().get_root().get_node("Spatial/UI/XPBar").value = level
+	get_tree().get_root().get_node("Spatial/UI/XPBar/Label").text = str(unlock_level+1)
 	
 	var notifyscene = load("res://objects/Player/notify.tscn")
 	var help = notifyscene.instance()
-	help.set_modulate(Color(0, 1, 0))
-	help.set_label("EXPERIENCE +1")
+	help.set_modulate(Color("158968"))
+	help.set_label("+1")
 	self.add_child(help)
 	
 	if level == 6:
@@ -81,6 +84,8 @@ func _set_numclears(_numclears):
 	if num_clears == 3:
 		# win!
 		print("winner")
+		get_tree().get_root().get_node("Spatial/UI/EndCard/EndText").text = 'YOU WON!'
+		get_tree().get_root().get_node("Spatial/UI/EndCard").visible = true
 
 func _check_unlocks():
 	if unlock_level >= 0:
@@ -209,6 +214,8 @@ func _input(event):
 					bow_charged = false
 					$BowChargeTimer.stop()
 					$BowChargeTimer.start()
+	elif event is InputEventKey and event.scancode == KEY_R and (health <= 0 or num_clears==3):
+		get_tree().reload_current_scene()
 
 func _on_AttackChargeTimer_timeout():
 	attack_charged = true

@@ -28,9 +28,9 @@ func _ready():
 	
 	var billboardscene = load("res://objects/Player/billboard.tscn")
 	billboard = billboardscene.instance()
-	billboard.set_label("REMAINING: " + String(total_enemies))
+	billboard.set_label("(" + String(total_enemies) + ")")
 	self.add_child(billboard)
-	billboard.translate(Vector3(0, 0, 2))
+	billboard.translate(Vector3(0, 1, 0))
 
 func notify_spawn_death(monster, reduce_count):
 	var mpath = monster.get_path()
@@ -39,7 +39,7 @@ func notify_spawn_death(monster, reduce_count):
 		self.remove_child(monster)
 	if reduce_count:
 		self.total_enemies -= 1
-		billboard.set_label("REMAINING: " + String(total_enemies))
+		billboard.set_label("(" + String(total_enemies) + ")")
 		_check_empty()
 
 func _check_empty():
