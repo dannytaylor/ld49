@@ -1,7 +1,7 @@
 extends Spatial
 
-export(float) var lifetime = 0.20
-export(float) var max_size = 1
+export(float) var lifetime = 1.66
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,11 +12,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var pct_done = 1.0 - ($Lifetime.time_left / lifetime)
-	$MeshInstance.scale.x = max_size * pct_done
-	$MeshInstance.scale.z = max_size * pct_done
-
+	
+	# Travel along the path
+	$ArrowPath/PathFollow.unit_offset = pct_done
+	
 
 func _on_Lifetime_timeout():
 	for child in self.get_children():
 		child.queue_free()
 	self.queue_free()
+
+func get_path():
+	return $ArrowPath

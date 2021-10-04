@@ -1,6 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://objects/Enemy/EnemyUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/Enemy/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://assets/meshes/baddie01.tscn" type="PackedScene" id=2]
 
 [sub_resource type="SphereShape" id=6]
@@ -24,6 +25,10 @@ material = SubResource( 4 )
 
 [node name="Enemy" type="RigidBody"]
 gravity_scale = 2.0
+collision_layer = 129
+collision_mask = 129
+mass = 23.81
+script = ExtResource( 2 )
 
 [node name="baddie01_mesh" parent="." instance=ExtResource( 2 )]
 transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.0898738, 0 )
@@ -39,3 +44,14 @@ material/0 = null
 [node name="EnemyUI" parent="CollisionShape" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 mesh = SubResource( 5 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="BackswingTimer" type="Timer" parent="."]
+
+[node name="CheckTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="BackswingTimer" to="." method="_on_BackswingTimer_timeout"]
+[connection signal="timeout" from="CheckTimer" to="." method="_on_CheckTimer_timeout"]
