@@ -67,7 +67,7 @@ func _set_level(_level):
 	help.set_label("EXPERIENCE +1")
 	self.add_child(help)
 	
-	if level == 10:
+	if level == 6:
 		unlock_level += 1
 		_check_unlocks()
 		_set_level(1)
