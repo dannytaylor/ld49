@@ -464,10 +464,12 @@ shape = SubResource( 4 )
 [node name="AttackChargeTimer" type="Timer" parent="Hero"]
 wait_time = 0.66
 one_shot = true
+autostart = true
 
 [node name="BowChargeTimer" type="Timer" parent="Hero"]
 wait_time = 0.33
 one_shot = true
+autostart = true
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.588233, 0.633058, -0.571428 )
