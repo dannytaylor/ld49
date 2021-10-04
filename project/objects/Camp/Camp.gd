@@ -1,6 +1,6 @@
 extends Spatial
 
-export(int) var total_enemies = 10
+export(int) var total_enemies = 6
 export(int) var max_simul = 2
 export(float) var spawn_delay = 30
 export(String) var camp_name = "NULL_CAMP"

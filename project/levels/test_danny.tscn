@@ -117,9 +117,9 @@ one_shot = true
 autostart = true
 
 [node name="SwordCharge" type="Label" parent="Board/Hero"]
-margin_left = 26.3058
+margin_left = 51.0152
 margin_top = -6.22346
-margin_right = 127.306
+margin_right = 152.015
 margin_bottom = 7.77654
 __meta__ = {
 "_edit_use_anchors_": false
@@ -160,9 +160,9 @@ __meta__ = {
 }
 
 [node name="BowCharge" type="Label" parent="Board/Hero"]
-margin_left = 126.931
+margin_left = 151.64
 margin_top = -6.05287
-margin_right = 226.931
+margin_right = 251.64
 margin_bottom = 84.9471
 __meta__ = {
 "_edit_use_anchors_": false
@@ -317,26 +317,26 @@ environment = SubResource( 3 )
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" type="ProgressBar" parent="UI"]
-margin_left = 959.0
+margin_left = 950.22
 margin_top = 36.2245
-margin_right = 1361.0
+margin_right = 1352.22
 margin_bottom = 136.225
 rect_scale = Vector2( 0.5, 0.5 )
 custom_styles/fg = SubResource( 4 )
 custom_styles/bg = SubResource( 5 )
-max_value = 50.0
+max_value = 25.0
 step = 1.0
-value = 50.0
+value = 25.0
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="XPBar" type="ProgressBar" parent="UI"]
-margin_left = 961.119
-margin_top = 104.225
-margin_right = 1363.12
-margin_bottom = 204.225
+margin_left = 950.839
+margin_top = 104.725
+margin_right = 1352.84
+margin_bottom = 204.725
 rect_scale = Vector2( 0.5, 0.5 )
 custom_styles/fg = SubResource( 6 )
 custom_styles/bg = SubResource( 5 )
@@ -374,9 +374,9 @@ __meta__ = {
 }
 
 [node name="TexHeart" type="TextureRect" parent="UI"]
-margin_left = 969.755
+margin_left = 960.975
 margin_top = 46.4269
-margin_right = 1481.75
+margin_right = 1472.98
 margin_bottom = 558.427
 rect_scale = Vector2( 0.06, 0.06 )
 texture = ExtResource( 12 )
@@ -385,9 +385,10 @@ __meta__ = {
 }
 
 [node name="EndCard" type="ColorRect" parent="UI"]
+visible = false
 margin_right = 1200.0
 margin_bottom = 798.0
-color = Color( 1, 1, 1, 0.25098 )
+color = Color( 1, 1, 1, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

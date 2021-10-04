@@ -3,7 +3,9 @@ extends MeshInstance
 var attack_charged = false
 var bow_charged = false
 
-export(float) var health = 50.0 setget _set_health
+var captureMouse = false
+
+export(float) var health = 25.0 setget _set_health
 export(float) var level = 0 setget _set_level
 
 var num_clears = 0 setget _set_numclears
@@ -198,6 +200,10 @@ func _attack_enemy_with_bow():
 
 func _input(event):
 	if event is InputEventMouseButton:
+		if not captureMouse:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			captureMouse = true
+			
 		if event.button_index == 1:
 			if event.pressed == true:
 				if attack_charged:
